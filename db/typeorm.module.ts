@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
-import { TypeOrmModule as NestTypeOrmModule } from '@nestjs/typeorm'
 
+import { TypeOrmModule as NestTypeOrmModule } from '@nestjs/typeorm'
 import{User} from '../src/users/entities/user.entity'
 
 @Module({
@@ -15,7 +15,7 @@ import{User} from '../src/users/entities/user.entity'
       entities: [User],
       synchronize: true,
       //migrations: [ 'dist/db/migrations/**/*.js' ],
-      // cli: { migrationsDir: 'src/db/migrations' },
+     //cli: { migrationsDir: 'src/db/migrations' }
     })
   ]
 })

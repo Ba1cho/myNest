@@ -11,11 +11,6 @@ export class UpdateUserDto {
   @MinLength(1)
   nameFirst: string
 
-  @IsString()
-  @ApiProperty({type: String, description: 'NAMELAST', example: 'Ivanov'})
-  @MinLength(1)
-  nameLast: string
-
   @IsISO8601()
   birthDate: Date
 

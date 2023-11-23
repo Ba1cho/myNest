@@ -1,4 +1,4 @@
-import { IsEmail, IsString, IsISO8601, IsNotEmpty, IsEnum, MinLength, Length } from 'class-validator'
+import { IsEmail, IsString, IsISO8601, IsNotEmpty, IsEnum, MinLength, Length, ValidateIf, IsNumber, IsInt, Min } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
     @IsEmail()
@@ -14,15 +14,11 @@ export class CreateUserDto {
     @ApiProperty({type: String, description: 'NAME', example: 'Ivan'})
     @MinLength(1)
     nameFirst: string
-  
-    @IsString()
-    @ApiProperty({type: String, description: 'NAMELAST', example: 'Ivanov'})
-    @MinLength(1)
-    nameLast: string
-  
-    @IsISO8601()
-    @Length(5, 100)
-    @ApiProperty({type: String, description: 'NAMELAST', example: 20})
+
+    @ValidateIf((object) => object.name!= undefined)
+    @IsInt()
+    @Min(2)
+    @ApiProperty({type: Number, description: 'NAMELAST', example: 20})
     birthDate: number
   
     @IsString()
@@ -30,3 +26,4 @@ export class CreateUserDto {
     @MinLength(1)
     role: string
 }
+

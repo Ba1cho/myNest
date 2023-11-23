@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AppComponent } from 'src/pipes/age.pipes';
+import { MyPipe } from 'src/pipes/age.pipes';
 
 @Controller('users')
 @ApiTags('users')
@@ -33,6 +33,6 @@ export class UsersController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    return this.usersService.deleteUser(+id);
   }
 }

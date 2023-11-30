@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -40,7 +40,7 @@ export class UsersService {
   // создание учетки
   async create(createUserDto): Promise<CreateUserDto> {
     const age = createUserDto.birthDate
-    if(age<1) throw new BadRequestException(ApiErorr.USER_EXIST) 
+    if(age<1) throw new BadRequestException(ApiErorr.USER_AGE) 
     createUserDto.password = await this.Hashpassword(createUserDto.password)
     await this.userRepository.save(createUserDto)
     return createUserDto
@@ -48,6 +48,9 @@ export class UsersService {
   // получение по id
   public async getUserData(id: number) {
     return await this.userRepository.findOne({where: { id:id }})
+  }
+  public async getUserEmail(email: string) {
+    return await this.userRepository.findOne({where: { email}})
   }
   // вывод всех пользователей
   public async findAll() {
@@ -68,4 +71,13 @@ export class UsersService {
   public async deleteUser(id: number) {
     return await this.userRepository.delete(id)
   }
+  // Need Fixing
+  public async range(id1:  number, id2: number){
+    let users = []
+    for (let i = id1; i < id2;i++){
+        users.push(this.userRepository.findOne({where: { id:i }}))
+    }
+    return users;
+  }
+  
 }

@@ -1,3 +1,6 @@
 export const ApiErorr = {
-    USER_EXIST: "must be over 1 year old"
+    USER_EXIST: "USER ITHI THIS EMAIL EXIST",
+    USER_NOT_EXIST: "USER ITHI THIS EMAIL NOT EXIST",
+    USER_AGE: "USER AGE > 0",
+    WRONG_DATA: "WRONG DATA"
 }
